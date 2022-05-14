@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+    let templateStr = `<h1>今天梦游半天想打游戏想玩{{game}}，还是算了学点{{code}}</h1>`
+    let data ={
+        game: 'LOL',
+        code: 'javaScript'
+    }
+    function render(templateStr, data){
+       return  templateStr.replace(/\{\{(\w+)\}\}/g ,function(findStr, $1){
+            return data[$1]
+        })
+    }
+    let result =  render(templateStr, data)
+    console.log(result)
+
+</script>
+
+</body>
+</html>

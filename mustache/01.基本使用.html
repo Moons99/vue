@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .content{
+            width: 500px;
+            display: flex;
+            justify-content: space-between;
+        }
+    </style>
+    <script src="static/mustache.js"></script>
+</head>
+<body>
+<div class='content'>
+    <div id="container"></div>
+    <div id="container1"></div>
+</div>
+
+<!-- 第一种-->
+<script>
+    let templateStr = `
+        <ul>
+         {{#arr}}
+            <li>姓名:{{name}}</li>
+            <li>年龄{{age}}</li>
+            <li>爱好
+                {{#Hobby}}
+                <ol>
+                    <li>{{.}}</li>
+                </ol>
+                {{/Hobby}}
+            </li>
+         {{/arr}}
+        </ul>
+    `
+    let data = {
+        arr: [
+            {name: '张三', age: 19, Hobby: ['写代码','打游戏']},
+            {name: '王五', age: 12, Hobby: ['做饭']},
+            {name: '李四', age: 21, Hobby: ['吃','喝','玩']},
+        ]
+    }
+    const domStr = Mustache.render(templateStr, data)
+    document.getElementById('container').innerHTML = domStr
+</script>
+
+
+<!-- 第二种-->
+<script type="text/template" id="myTemplate">
+    <ul>
+        {{#arr}}
+        <li>姓名:{{name}}</li>
+        <li>年龄{{age}}</li>
+        <li>爱好
+            {{#Hobby}}
+            <ol>
+                <li>{{.}}</li>
+            </ol>
+            {{/Hobby}}
+        </li>
+        {{/arr}}
+    </ul>
+</script>
+<script>
+    let templateStr1 = document.getElementById('myTemplate').innerHTML
+    let domStr1 = Mustache.render(templateStr1, data)
+    document.getElementById('container1').innerHTML = domStr1
+</script>
+</body>
+</html>
